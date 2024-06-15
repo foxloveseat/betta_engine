@@ -1,0 +1,8 @@
+[package]
+name = "betta"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+sdl2 = "0.37.0"
+vec2 = "0.2.1"
