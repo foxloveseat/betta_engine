@@ -30,7 +30,7 @@ impl State for GameState {
                 Event::Quit { .. } => exit(0),
                 Event::KeyDown { keycode: Some(keycode), .. } => {
                     match keycode {
-                        Keycode::W => self.player.position.y += 1,
+                        Keycode::W => self.player.position.y -= 1,
                         _ => {}
                     }
                 }

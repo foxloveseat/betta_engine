@@ -26,6 +26,7 @@ pub mod setup {
         let mut event_pump = sdl_context.event_pump().unwrap();
         state.setup(canvas, sdl_context);
         'running: loop {
+            ::std::thread::sleep(Duration::new(0, 1_000_000_000u32/60));
             // The rest of the game loop goes here...
             state.update(canvas, sdl_context, &mut event_pump);
             canvas.present();
