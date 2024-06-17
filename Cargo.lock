@@ -3,17 +3,10 @@
 version = 3
 
 [[package]]
-name = "autocfg"
-version = "1.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0c4b4d0bd25bd0b74681c0ad21497610ce1b7c91b1022cd21c80c6fbdd9476b0"
-
-[[package]]
 name = "betta"
 version = "0.1.0"
 dependencies = [
  "sdl2",
- "vec2",
 ]
 
 [[package]]
@@ -21,12 +14,6 @@ name = "bitflags"
 version = "1.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
-
-[[package]]
-name = "cast_trait"
-version = "0.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c4f8d981c476baadf74cd52897866a1d279d3e14e2d5e2d9af045210e0ae6128"
 
 [[package]]
 name = "cfg-if"
@@ -45,15 +32,6 @@ name = "libc"
 version = "0.2.155"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "97b3888a4aecf77e811145cadf6eef5901f4782c53886191b2f693f24761847c"
-
-[[package]]
-name = "num-traits"
-version = "0.2.19"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "071dfc062690e90b734c0b2273ce72ad0ffa95f0c74596bc250dcfd960262841"
-dependencies = [
- "autocfg",
-]
 
 [[package]]
 name = "sdl2"
@@ -76,27 +54,6 @@ dependencies = [
  "cfg-if",
  "libc",
  "version-compare",
-]
-
-[[package]]
-name = "vec2"
-version = "0.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a54c8415531b580fac54552a697128f338ea26bb790b88a5c6351e401b4cbb3f"
-dependencies = [
- "cast_trait",
- "num-traits",
- "vec3",
-]
-
-[[package]]
-name = "vec3"
-version = "0.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6ad952cfbcbc36c86769e13cf9ce2203b6ce9271fa54a03f259a35d1930449e1"
-dependencies = [
- "cast_trait",
- "num-traits",
 ]
 
 [[package]]

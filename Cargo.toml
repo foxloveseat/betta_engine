@@ -5,4 +5,3 @@ edition = "2021"
 
 [dependencies]
 sdl2 = "0.37.0"
-vec2 = "0.2.1"

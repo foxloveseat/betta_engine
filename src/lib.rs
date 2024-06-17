@@ -1,43 +1,33 @@
 pub mod setup {
     use std::process::exit;
-
+    use std::time::Duration;
     use crate::math;
     use crate::window::Context;
     use sdl2::render::Canvas;
     pub use sdl2::video::Window;
-    use sdl2::Sdl;
+    use sdl2::{EventPump, Sdl};
     use sdl2::event::Event;
     use sdl2::keyboard::Keycode;
     use sdl2::pixels::Color;
     pub trait State {
-        fn update(&self, canvas: &mut Canvas<Window>, sdl_context: &Sdl) {
+        fn update(&mut self, canvas: &mut Canvas<Window>, sdl_context: &Sdl, event_pump: &mut EventPump) {
             
         }
         
 
-        fn setup(&self, canvas: &mut Canvas<Window>, sdl_context: &Sdl) {
+        fn setup(&mut self, canvas: &mut Canvas<Window>, sdl_context: &Sdl) {
             
         }
     }
 
-    pub fn start(sdl_context: &Sdl, canvas: &mut Canvas<Window>, state: Box<dyn State>) {
+    pub fn start(sdl_context: &Sdl, canvas: &mut Canvas<Window>, mut state: Box<dyn State>) {
         canvas.clear();
         canvas.present();
         let mut event_pump = sdl_context.event_pump().unwrap();
         state.setup(canvas, sdl_context);
         'running: loop {
-            state.update(canvas, sdl_context);
-            for event in event_pump.poll_iter() {
-                match event {
-                    Event::Quit {..} |
-                    Event::KeyDown { keycode: Some(Keycode::Escape), .. } => {
-                        break 'running
-                    },
-                    _ => {}
-                }
-            }
             // The rest of the game loop goes here...
-    
+            state.update(canvas, sdl_context, &mut event_pump);
             canvas.present();
         }
     }
@@ -91,6 +81,7 @@ pub mod window {
 
 
 pub mod event {
+    pub use std::process::exit;
     pub use sdl2::event::Event;
 }
 
@@ -98,25 +89,30 @@ pub mod graphics {
     pub use sdl2::pixels::Color;
     pub use sdl2::render::Canvas;
     use sdl2::rect::Rect;
-
+    use sdl2::video::Window;
     use crate::math::*;
     pub struct Rectangle {
         pub position: Vec2<i32>,
-        pub scale: Vec2<u32>
+        pub scale: Vec2<u32>,
+        pub color: Color,
     }
 
     impl Rectangle {
-        pub fn draw(&self) {
+        pub fn draw(&self, canvas: &mut Canvas<Window>) {
             let pos_x = self.position.x;
             let pos_y = self.position.y;
             let scale_x = self.scale.x;
             let scale_y = self.scale.y;
+            canvas.set_draw_color(self.color);
             let rect = Rect::new(pos_x, pos_y, scale_x, scale_y);
-            
+            let _ = canvas.fill_rect(rect);
+            canvas.present();
         }
     }
 }
 
 pub mod input {
     pub use sdl2::keyboard::Keycode;
+    pub use sdl2::event::Event::KeyDown;
+    pub use sdl2::event::Event::KeyUp;
 }
